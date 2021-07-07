@@ -1,0 +1,13 @@
+.red {color:lightcoral}
+.green {
+    color:rgb(50, 243, 50);
+    font-size: large;
+}
+.blue {
+    color:#f7f306;
+    font-size: xx-large;
+}
+.list-group{ 
+    font-size:1rem;
+    font-size: x-large;
+}
