@@ -13,39 +13,40 @@
     <link rel="stylesheet" href="design.css">
 </head>
 <body>
-    <div>
+    <div class="background">
         <div class="container">
             <div class="row">
                 <div class="col mx-auto col-md-8 mt-3 text-center">
                     <div class="alert align-item-center" id="message"></div>
                     <form action="" id="itemForm">
-                        <h3>To Do List</h3>
+                        <h3 id="heading"> <b>To Do List</b> </h3>
                         <div class="input-group mb-3">
                             <input type="text" class="form-control" id="itemInput" value="" placeholder="Enter task here">
                             <button class="btn btn-outline-primary">Add Item</button>
                         </div>
                     </form>
                     <ul class="nav nav-tabs">
-                        <li class="nav-item">
-                          <a class="nav-link active" aria-current="page" href="#">Yet to be done</a>
+                        <li class="nav-item" data-type="all">
+                          <a class="nav-link active" aria-current="page" href="#">All</a>
                         </li>
-                        <li class="nav-item dropdown">
-                          <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Select Priority</a>
-                          <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#">Show all</a></li>
-                            <li><a class="dropdown-item" href="#">Priority 1</a></li>
-                            <li><a class="dropdown-item" href="#">Priority 2</a></li>
+                        <li class="nav-item dropdown" data-type="dropdown">
+                          <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false"> Select Priority </a>
+                          <ul class="dropdown-menu" data-type="drop">
+                            <li><a class="dropdown-item" href="#" data-type="left" >Left To Be Done</a></li>
+                            <li><a class="dropdown-item" href="#" data-type="one">Urgent</a></li>
+                            <li><a class="dropdown-item" href="#" data-type="two">High</a></li>
                             <!-- <li><hr class="dropdown-divider"></li> -->
-                            <li><a class="dropdown-item" href="#">Priority 3</a></li>
+                            <li><a class="dropdown-item" href="#"data-type="three">Medium</a></li>
+                            <li><a class="dropdown-item" href="#"data-type="three">Low</a></li>
                           </ul>
                         </li>
-                        <li class="nav-item">
-                          <a class="nav-link" href="#">Finished</a>
+                        <li class="nav-item" data-type="done">
+                          <a class="nav-link" href="#"> Completed</a>
                         </li>
                       </ul>
                       <!-- item Lists -->
                       <ul class="list-group list-group-flush" id="itemsList">
-                          <li class="list-group-item d-flex justify-content-between align-items-center">
+                          <!-- <li class="list-group-item d-flex justify-content-between align-items-center">
                               <span>Task 1</span>
                               <span>
                                 <a class="btn btn-sm btn-outline-success"><i class="fas fa-check-circle"> Done</i></a>
@@ -54,6 +55,18 @@
                               </span>
                           </li>
                       </ul>
+                      <ul class="list-group list-group-flush" id="itemsList">
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            <span>Task 2</span>
+                            <span>
+                              <a class="btn btn-sm btn-outline-success"><i class="fas fa-check-circle"> Done</i></a>
+                              <a class="btn btn-sm btn-outline-warning"><i class="fas fa-edit"></i> Edit</a>
+                              <a class="btn btn-sm btn-outline-danger"><i class="fas fa-trash-alt"></i> Delete</a>
+                            </span>
+                        </li> -->
+                    </ul>
+                    <input type="hidden" id="objIndex" value="">
+                    <input type="hidden" id="tabValue" value="all">
                 </div>
             </div>
         </div>
