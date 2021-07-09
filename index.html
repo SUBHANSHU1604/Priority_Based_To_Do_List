@@ -2,75 +2,81 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>To-Do-List</title>
-    <script src="https://kit.fontawesome.com/38dea4fa8c.js" crossorigin="anonymous"></script>
+    <title>To Do List</title>
     <!-- CSS only -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <!-- JavaScript Bundle with Popper -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="design.css">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
+<style>
+    .active {
+        background-color: black;
+        color: white;
+    }
+    .green {
+        color:lightgreen;
+    }
+    .red {
+        color:lightcoral;
+    }
+    .blue {
+        color:skyblue
+    }
+    #itemList {
+        font-size: 1.2rem;
+    }
+    
+    .show { display: block;}
+    .hide { display: none;}
+</style>
 </head>
-<body>
-    <div class="background">
-        <div class="container">
-            <div class="row">
-                <div class="col mx-auto col-md-8 mt-3 text-center">
-                    <div class="alert align-item-center" id="message"></div>
-                    <form action="" id="itemForm">
-                        <h3 id="heading"> <b>To Do List</b> </h3>
-                        <div class="input-group mb-3">
-                            <input type="text" class="form-control" id="itemInput" value="" placeholder="Enter task here">
-                            <button class="btn btn-outline-primary">Add Item</button>
-                        </div>
-                    </form>
-                    <ul class="nav nav-tabs">
-                        <li class="nav-item" data-type="all">
-                          <a class="nav-link active" aria-current="page" href="#">All</a>
-                        </li>
-                        <li class="nav-item dropdown" data-type="dropdown">
-                          <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false"> Select Priority </a>
-                          <ul class="dropdown-menu" data-type="drop">
-                            <li><a class="dropdown-item" href="#" data-type="left" >Left To Be Done</a></li>
-                            <li><a class="dropdown-item" href="#" data-type="one">Urgent</a></li>
-                            <li><a class="dropdown-item" href="#" data-type="two">High</a></li>
-                            <!-- <li><hr class="dropdown-divider"></li> -->
-                            <li><a class="dropdown-item" href="#"data-type="three">Medium</a></li>
-                            <li><a class="dropdown-item" href="#"data-type="three">Low</a></li>
-                          </ul>
-                        </li>
-                        <li class="nav-item" data-type="done">
-                          <a class="nav-link" href="#"> Completed</a>
-                        </li>
-                      </ul>
-                      <!-- item Lists -->
-                      <ul class="list-group list-group-flush" id="itemsList">
-                          <!-- <li class="list-group-item d-flex justify-content-between align-items-center">
-                              <span>Task 1</span>
-                              <span>
-                                <a class="btn btn-sm btn-outline-success"><i class="fas fa-check-circle"> Done</i></a>
-                                <a class="btn btn-sm btn-outline-warning"><i class="fas fa-edit"></i> Edit</a>
-                                <a class="btn btn-sm btn-outline-danger"><i class="fas fa-trash-alt"></i> Delete</a>
-                              </span>
-                          </li>
-                      </ul>
-                      <ul class="list-group list-group-flush" id="itemsList">
-                        <li class="list-group-item d-flex justify-content-between align-items-center">
-                            <span>Task 2</span>
-                            <span>
-                              <a class="btn btn-sm btn-outline-success"><i class="fas fa-check-circle"> Done</i></a>
-                              <a class="btn btn-sm btn-outline-warning"><i class="fas fa-edit"></i> Edit</a>
-                              <a class="btn btn-sm btn-outline-danger"><i class="fas fa-trash-alt"></i> Delete</a>
-                            </span>
-                        </li> -->
-                    </ul>
-                    <input type="hidden" id="objIndex" value="">
-                    <input type="hidden" id="tabValue" value="all">
+<body style="background-color: #1c1f24">
+<div class="container">
+    <div class="row">
+        <div class="col mx-auto col-md-8 mt-3 text-center">
+            <form id="itemForm" >
+                <h3 style="color:white; font-family:Georgia, 'Times New Roman', Times, serif" class="display-4">To Do List</h3>
+                <div style="height: 80px;">
+                    <div class="alert align-items-center" id="message"></div>
                 </div>
+            <div class="input-group mb-3">
+                <select id="itemPriority" style="background-color: #cfd4d4; outline: none;" class="btn btn-lg" aria-labelledby="dropdownMenuButton1" name="priority" id="">
+                    <option value="">--Priority--</option>
+                    <option value="low">Low</option>
+                    <option value="medium">Medium</option>
+                    <option value="urgent">Urgent</option>
+                </select>
+                <input style="height:50px; font-size: 24px;" type="text" class="form-control"  id="itemInput" value="" placeholder="Please enter name...">
+                <button style="outline: none;" class="btn btn-outline-primary btn-lg">ADD ITEM</button>
             </div>
+        </form>
+        <ul class="nav nav-tabs">
+            <li class="nav-item" data-type="all">
+              <a class="nav-link active" href="#">All</a>
+            </li>
+            <li class="nav-item" data-type="todo">
+              <a class="nav-link" href="#">To Do</a>
+            </li>
+            <li class="nav-item" data-type="done">
+              <a class="nav-link" href="#">Completed</a>
+            </li>
+            <li class="nav-item" data-type="low">
+              <a class="nav-link" href="#">Low</a>
+            </li>
+            <li class="nav-item" data-type="medium">
+              <a class="nav-link" href="#">Medium</a>
+            </li>
+            <li class="nav-item" data-type="urgent">
+                <a class="nav-link" href="#">Urgent</a>
+            </li>
+        </ul>
+        <!-- list items -->
+        <ul style="max-height:55vh; overflow-y: scroll;" class="list-group list-group-flush" id="itemList"></ul>
+        <input type="hidden" id="filterType" value="all">
+        <input type="hidden" id="citem" value="">
         </div>
     </div>
-    <script src="main.js"></script>
+   
+</div>
+<script src="main.js"></script>
 </body>
 </html>
