@@ -8,6 +8,8 @@ const messageDiv = document.querySelector("#message");
 const clearButton = document.querySelector("#clearBtn");
 const filters = document.querySelectorAll(".nav-item");
 
+updateCount();
+
 // create empty item list
 let todoItems = [];
 
@@ -22,8 +24,44 @@ const showAlert = function (message, msgClass) {
   }, 3000);
   return;
 };
+
+// Update Count of UI:
+function updateCount() {
+  console.log("i am being called");
+  let directStorage = window.localStorage.getItem("todoItems");
+  directStorage = JSON.parse(directStorage);
+
+  let nums = document.getElementsByClassName("nums");
+  for(let i = 0; i < nums.length; i++) {
+    console.log(nums[i].id);
+    let type = nums[i].id;
+    switch (type) {
+      case "todo":
+        filterItems = directStorage.filter((item) => !item.isDone);
+        break;
+      case "done":
+        filterItems = directStorage.filter((item) => item.isDone);
+        break;
+      case "low":
+        filterItems = directStorage.filter((item) => (item.priority === "low"));
+        break;
+      case "medium":
+        filterItems = directStorage.filter((item) => (item.priority === "medium"));
+        break;
+      case "urgent":
+        filterItems = directStorage.filter((item) => (item.priority === "urgent"));
+        break;
+      default:
+        filterItems = directStorage;
+    }
+    console.log(filterItems.length);
+    nums[i].innerHTML = `( ${filterItems.length} )`;
+  }
+}
+
 // filter tab items
 const getItemsFilter = function (type) {
+  console.log("get filter");
   let filterItems = [];
   console.log(type);
   switch (type) {
@@ -45,22 +83,26 @@ const getItemsFilter = function (type) {
     default:
       filterItems = todoItems;
   }
+  updateCount();
   getList(filterItems);
 };
 
 // update item
-const updateItem = function (itemIndex, newValue) {
+const updateItem = function (itemIndex, newValue, newPriority) {
   console.log(itemIndex);
   const newItem = todoItems[itemIndex];
   newItem.name = newValue;
+  newItem.priority = newPriority;
   todoItems.splice(itemIndex, 1, newItem);
   setLocalStorage(todoItems);
+  updateCount();
 };
 
 // remove/delete item
 const removeItem = function (item) {
   const removeIndex = todoItems.indexOf(item);
   todoItems.splice(removeIndex, 1);
+  updateCount();
 };
 
 //bi-check-circle-fill  // bi-check-circle
@@ -122,21 +164,21 @@ const getList = function (todoItems) {
   if (todoItems.length > 0) {
     todoItems.forEach((item) => {
       let color = "white";
-      if(item.priority === "low") color = "#485757"; 
-      if(item.priority === "medium") color = "#ffb300"; 
-      if(item.priority === "urgent") color = "#ff2b2b"; 
+      if(item.priority === "low") color = "#a0e8b3"; 
+      if(item.priority === "medium") color = "#ffed87"; 
+      if(item.priority === "urgent") color = "#ffd1d3"; 
       const iconClass = item.isDone
         ? "bi-check-circle-fill"
         : "bi-check-circle";
       itemList.insertAdjacentHTML(
         "beforeend",
         `<li class="list-group-item d-flex justify-content-between align-items-center">
-          <span style="color:white; background-color:${color}; border-radius:5px; padding:1px 5px; width:120px; font-size: 20px;">${item.priority}</span>
+          <span style="color:black; background-color:${color}; border-radius:5px; padding:1px 5px; width:120px; font-size: 20px;">${item.priority}</span>
           <span class="title" data-time="${item.addedAt}">${item.name}</span> 
           <span>
-              <a href="#" data-done><i class="bi ${iconClass} green"></i></a>
-              <a href="#" data-edit><i class="bi bi-pencil-square blue"></i></a>
-              <a href="#" data-delete><i class="bi bi-x-circle red"></i></a>
+              <a style="font-size: 20px;" href="#" data-done><i class="bi ${iconClass} green"></i></a>
+              <a style="font-size: 20px;" href="#" data-edit><i class="bi bi-pencil-square blue"></i></a>
+              <a style="font-size: 20px;" href="#" data-delete><i class="bi bi-x-circle red"></i></a>
           </span>
         </li>`
       );
@@ -185,7 +227,7 @@ document.addEventListener("DOMContentLoaded", () => {
       // update existing Item
       const currenItemIndex = document.querySelector("#citem").value;
       if (currenItemIndex) {
-        updateItem(currenItemIndex, itemName);
+        updateItem(currenItemIndex, itemName, itemP);
         document.querySelector("#citem").value = "";
         showAlert("Item has been updated.", "alert-success");
       } else {
@@ -199,6 +241,7 @@ document.addEventListener("DOMContentLoaded", () => {
         todoItems.push(itemObj);
         // set local storage
         setLocalStorage(todoItems);
+        updateCount();
         showAlert("New item has been added.", "alert-success");
       }
 

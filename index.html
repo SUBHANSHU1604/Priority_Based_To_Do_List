@@ -30,11 +30,14 @@
 </style>
 </head>
 <body style="background-color: #1c1f24">
+    <header>
+        <h3 style="color:white; font-family:Georgia, 'Times New Roman', Times, serif; text-align:center;" class="display-4 mt-2">To Do List</h3>
+    </header>
 <div class="container">
     <div class="row">
         <div class="col mx-auto col-md-8 mt-3 text-center">
             <form id="itemForm" >
-                <h3 style="color:white; font-family:Georgia, 'Times New Roman', Times, serif" class="display-4">To Do List</h3>
+                
                 <div style="height: 80px;">
                     <div class="alert align-items-center" id="message"></div>
                 </div>
@@ -51,22 +54,22 @@
         </form>
         <ul class="nav nav-tabs">
             <li class="nav-item" data-type="all">
-              <a class="nav-link active" href="#">All</a>
+              <a class="nav-link active" href="#">All <span class="nums" id="all"></span></a>
             </li>
             <li class="nav-item" data-type="todo">
-              <a class="nav-link" href="#">To Do</a>
+              <a class="nav-link" href="#">To Do <span class="nums" id="todo"></span></a>
             </li>
             <li class="nav-item" data-type="done">
-              <a class="nav-link" href="#">Completed</a>
+              <a class="nav-link" href="#">Completed <span class="nums" id="done"></span></a>
             </li>
             <li class="nav-item" data-type="low">
-              <a class="nav-link" href="#">Low</a>
+              <a class="nav-link" href="#">Low <span class="nums" id="low"></span></a>
             </li>
             <li class="nav-item" data-type="medium">
-              <a class="nav-link" href="#">Medium</a>
+              <a class="nav-link" href="#">Medium <span class="nums" id="medium"></span></a>
             </li>
             <li class="nav-item" data-type="urgent">
-                <a class="nav-link" href="#">Urgent</a>
+                <a class="nav-link" href="#">Urgent <span class="nums" id="urgent"></span></a>
             </li>
         </ul>
         <!-- list items -->
@@ -75,7 +78,11 @@
         <input type="hidden" id="citem" value="">
         </div>
     </div>
-   
+    
+    <footer class="footer"></footer>
+        <p style="font-size:small; color:white; font-size: small; text-align:center;" class="mt-4">Made with ♥️ by Subhanshu</p>
+    </footer>
+    
 </div>
 <script src="main.js"></script>
 </body>
